@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Step Details">
+		<div class="slds-var-m-around_medium">
+			<!-- Show Step Name when User_Assigned_Task is loaded -->
+			<template if:true={User_Assigned_Task.data}>
+				<lightning-record-form
+					object-api-name="Onboarding_Step__c"
+					record-id={Step_name__c}
+					layout-type="Compact">
+				</lightning-record-form>
+			</template>
+			<!-- Data failed to load -->
+			<template if:true={User_Assigned_Task.error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the User_Assigned_Task record
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>
