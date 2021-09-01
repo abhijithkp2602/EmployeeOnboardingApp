@@ -1,16 +1,54 @@
-<template>
-    <lightning-card>
-    <template if:true={users.data}>
-        <lightning-tabset active-tab-value="two">
-            <lightning-tab label="Employee List" value="one">
-            </lightning-tab>
-            <lightning-datatable
-                key-field="Id"
-                data={users.data}
-                columns={columns}
-            >
-            </lightning-datatable>
-        </lightning-tabset>
-    </template>
-</lightning-card>
+<!-- <template>
+    <lightning-card
+        title="GuideList"
+        icon-name="custom:custom63"
+    >
+        <div class="slds-var-m-around_medium">
+            <template if:true={contacts}>
+                <template for:each={contacts} for:item="contact">
+                    <p key={contact.Id}>{contact.Name}</p>
+                </template>
+            </template>
+            
+        </div>
+    </lightning-card>
+</template>
+ -->
+ <template>
+	<lightning-card title="Employee List" icon-name="">
+		<div class="slds-card__body_inner">
+			<!-- Start Guide list -->
+			<template if:true={employees.data}>
+				<lightning-input type="search"
+					onchange={handleSearchTermChange}
+					variant="label-hidden"
+					class="slds-var-m-bottom_small"
+					label="Search"
+					placeholder="Search for Employees"
+					value={searchTerm}>
+				</lightning-input>
+				<lightning-layout multiple-rows="true" pull-to-boundary="small">
+					<template for:each={employees.data} for:item="employee">
+						<lightning-layout-item key={employees.Id} size="3" class="slds-var-p-around_x-small">
+							<c-employee-tile employee={employee} onemployeeview={handleEmployeeView}></c-employee-tile>
+						</lightning-layout-item>
+					</template>
+				</lightning-layout>
+				<!-- No bears found -->
+				<template if:false={hasResults}>
+					<div class="slds-align_absolute-center slds-var-m-vertical_small">
+						we did not find results...
+					</div>
+				</template>
+			</template>
+			<!-- End bear list -->
+			<!-- Data failed to load -->
+			<template if:true={employees.error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the employee list
+				</div>
+			</template>
+		</div>
+		
+	</lightning-card>
 </template>

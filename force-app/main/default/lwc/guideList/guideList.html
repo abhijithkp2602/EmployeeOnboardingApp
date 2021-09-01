@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <lightning-card
         title="GuideList"
         icon-name="custom:custom63"
@@ -9,15 +9,48 @@
                     <p key={contact.Id}>{contact.Name}</p>
                 </template>
             </template>
-            <!-- <template if:true={error}>
-                <c-error-panel errors={error}></c-error-panel>
-            </template> -->
+            
         </div>
-
-        <!-- <c-view-source source="lwc/guideList" slot="footer">
-            Call an Apex method that retrieves a list of records using @wire. In
-            this recipe, the Apex method is @wired to a component function.
-        </c-view-source> -->
     </lightning-card>
-    
+</template>
+ -->
+<template>
+	<lightning-card title="Guide List" icon-name="">
+		<div class="slds-card__body_inner">
+			<!-- Start Guide list -->
+			<template if:true={guides.data}>
+				<lightning-input type="search"
+					onchange={handleSearchTermChange}
+					variant="label-hidden"
+					class="slds-var-m-bottom_small"
+					label="Search"
+					placeholder="Search for Guides"
+					value={searchTerm}>
+				</lightning-input>
+				<lightning-layout multiple-rows="true" pull-to-boundary="small">
+					<template for:each={guides.data} for:item="guide">
+						<lightning-layout-item key={guides.Id} size="3" class="slds-var-p-around_x-small">
+							<c-guide-tile guide={guide} onguideview={handleGuideView}></c-guide-tile>
+							<!-- <lightning-tile label={guides.data} href="/path/to/somewhere">
+								<p class="slds-truncate" title="7 Members"></p>
+							</lightning-tile> -->
+						</lightning-layout-item>
+					</template>
+				</lightning-layout>
+				<!-- No bears found -->
+				<template if:false={hasResults}>
+					<div class="slds-align_absolute-center slds-var-m-vertical_small">
+						we did not find results...
+					</div>
+				</template>
+			</template>
+			<!-- End bear list -->
+			<!-- Data failed to load -->
+			<template if:true={guides.error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the Guide list
+				</div>
+			</template>
+		</div>
+	</lightning-card>
 </template>

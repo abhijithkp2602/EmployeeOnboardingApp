@@ -1,0 +1,25 @@
+<template>
+    <lightning-card>
+    <lightning-tabset active-tab-value="one">
+    <lightning-tab label = "User Enrollment" value="one">
+        <lightning-record-form
+          object-api-name={objectApiName}
+          fields={fields}
+          onsuccess={handleSuccess}
+          columns="2"
+        >
+        </lightning-record-form>
+    </lightning-tab>
+    <lightning-tab label = "Create Onboarding Step" value="two">
+        <lightning-record-form
+          object-api-name={objectApiName1}
+          fields={fields1}
+          onsuccess={handleSuccess}
+          columns="2"
+        >
+        </lightning-record-form>
+    </lightning-tab>
+      
+    </lightning-tabset>
+</lightning-card>
+</template>
