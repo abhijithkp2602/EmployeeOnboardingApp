@@ -1,11 +1,12 @@
 import { publish, MessageContext } from 'lightning/messageService';
 import GUIDE_LIST_UPDATE_MESSAGE from '@salesforce/messageChannel/GuideListUpdate__c';
 import { NavigationMixin } from 'lightning/navigation';
-import { LightningElement, wire } from 'lwc';
-/** BearController.searchguides(searchTerm) Apex method */
+import { LightningElement, wire} from 'lwc';
+// import getTask from '@salesforce/apex/EmployeeTaskController.getTask';
 import searchGuides from '@salesforce/apex/GuideController.searchGuides';
 export default class BearList extends NavigationMixin(LightningElement) {
 	searchTerm = '';
+	employeeList;
 	guides;
     @wire(MessageContext) messageContext;
     @wire(searchGuides, {searchTerm: '$searchTerm'})
@@ -33,35 +34,22 @@ export default class BearList extends NavigationMixin(LightningElement) {
 		return (this.guides.data.length > 0);
 	}
 	handleGuideView(event) {
-		// Get Guide record id from guideview event
-		const guideId = event.detail;
-		// Navigate to Guide record page
-		this[NavigationMixin.Navigate]({
-			type: 'standard__recordPage',
-			attributes: {
-				recordId: guideId,
-				objectApiName: 'User_Assigned_Task__c',
-				actionName: 'view',
-			},
-		});
+		console.log(event);
+		this.employeeList = event.detail;
 	}
+	// handleClick(event) {
+    //     getTask({
+    //         TaskId : event.target.dataset.taskid
+    //     })
+	// 	// .then(employeeList => {
+    //     //     const selectedEvent = new CustomEvent('guideview', {
+    //     //         detail : employeeList
+    //     //     });
+
+    //     // Dispatches the event.
+    //     //     this.dispatchEvent(selectedEvent);
+    //     //     console.log(employeeList)
+    //     // });
+	// 	this.dispatchEvent;
+    // }
 }
-
-
-
-
-// import { LightningElement, wire } from 'lwc';
-// import getContactList from '@salesforce/apex/GuideController.getContactList';
-
-// export default class GuideList extends LightningElement {
-//     contacts;
-//     error;
-
-//     @wire(getContactList)
-//     wiredContacts({ data }) {
-//         if (data) {
-//             this.contacts = data;
-//             this.error = undefined;
-//         } 
-//     }
-// }

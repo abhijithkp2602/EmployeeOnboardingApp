@@ -1,56 +1,57 @@
-<!-- <template>
-    <lightning-card
-        title="GuideList"
-        icon-name="custom:custom63"
-    >
-        <div class="slds-var-m-around_medium">
-            <template if:true={contacts}>
-                <template for:each={contacts} for:item="contact">
-                    <p key={contact.Id}>{contact.Name}</p>
-                </template>
-            </template>
-            
-        </div>
-    </lightning-card>
-</template>
- -->
 <template>
-	<lightning-card title="Guide List" icon-name="">
-		<div class="slds-card__body_inner">
-			<!-- Start Guide list -->
-			<template if:true={guides.data}>
-				<lightning-input type="search"
-					onchange={handleSearchTermChange}
-					variant="label-hidden"
-					class="slds-var-m-bottom_small"
-					label="Search"
-					placeholder="Search for Guides"
-					value={searchTerm}>
-				</lightning-input>
-				<lightning-layout multiple-rows="true" pull-to-boundary="small">
-					<template for:each={guides.data} for:item="guide">
-						<lightning-layout-item key={guides.Id} size="3" class="slds-var-p-around_x-small">
-							<c-guide-tile guide={guide} onguideview={handleGuideView}></c-guide-tile>
-							<!-- <lightning-tile label={guides.data} href="/path/to/somewhere">
-								<p class="slds-truncate" title="7 Members"></p>
-							</lightning-tile> -->
-						</lightning-layout-item>
+	<template if:false={employeeList}>
+		<lightning-card title="Guide List" icon-name="">
+			<div class="slds-card__body_inner">
+				<!-- Start Guide list -->
+				<template if:true={guides.data}>
+					<lightning-input type="search"
+						onchange={handleSearchTermChange}
+						variant="label-hidden"
+						class="slds-var-m-bottom_small"
+						label="Search"
+						placeholder="Search for Guides"
+						value={searchTerm}>
+					</lightning-input>
+					<lightning-layout multiple-rows="true" pull-to-boundary="small">
+						<template for:each={guides.data} for:item="guide">
+							<lightning-layout-item key={guides.Id} flexibility="auto" padding="around-small" size="3" class="slds-var-p-around_x-small">
+								<c-guide-tile guide={guide} onguideview={handleGuideView}></c-guide-tile>
+							</lightning-layout-item>
+						</template>
+					</lightning-layout>
+					<!-- No guide found -->
+					<template if:false={hasResults}>
+						<div class="slds-align_absolute-center slds-var-m-vertical_small">
+							we did not find results...
+						</div>
 					</template>
-				</lightning-layout>
-				<!-- No bears found -->
-				<template if:false={hasResults}>
-					<div class="slds-align_absolute-center slds-var-m-vertical_small">
-						we did not find results...
+				</template>
+				<!-- End guide list -->
+				<!-- Data failed to load        -->
+				<template if:true={guides.error}>
+					<div class="slds-text-color_error">
+						An error occurred while loading the Guide list
 					</div>
 				</template>
+			</div>
+		</lightning-card>
+	</template>
+	<template if:true={employeeList}>
+		
+		<lightning-card title="Employees" icon-name="custom:custom103" class="slds-m-top_medium slds-m-bottom_x-large">
+		<div class="slds-m-around_medium">
+		<lightning-layout multiple-rows="true" pull-to-boundary="small">
+			<template for:each={employeeList} for:item="emp">
+				<lightning-layout-item key={emp.Id} flexibility="auto" padding="around-small" class="slds-var-p-around_x-small">
+					{emp.Employee_Name__r.Name}
+					<!-- <lightning-button label="View Task" variant="brand" onclick={handleClick} class="slds-m-left_x-small"></lightning-button> -->
+				</lightning-layout-item>
+				
+				<!-- <lightning-button label="View Employee" variant="brand" data-guideid={guide.Id} onclick={handleClick} class="slds-m-left_x-small"></lightning-button>	 -->
 			</template>
-			<!-- End bear list -->
-			<!-- Data failed to load -->
-			<template if:true={guides.error}>
-				<div class="slds-text-color_error">
-					An error occurred while loading the Guide list
-				</div>
-			</template>
+		</lightning-layout>
 		</div>
-	</lightning-card>
+		</lightning-card>
+	
+	</template>
 </template>

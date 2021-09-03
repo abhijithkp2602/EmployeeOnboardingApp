@@ -1,15 +1,3 @@
-// //public with sharing class UserController {
-//     @AuraEnabled(cacheable=true)
-//     public static List<User> getUserList() {
-//         return [
-//             Select Name, UserRole.Name from User
-//             WHERE UserRole.Name = 'Employee'
-//             WITH SECURITY_ENFORCED
-//             ORDER BY Name
-//         ];
-//     }
-// }
-
 public with sharing class UserController {
     @AuraEnabled(Cacheable=true)
     public static User_functional_role_junction__c[] getEmployeesList() {
@@ -22,7 +10,7 @@ public with sharing class UserController {
 
     @AuraEnabled(Cacheable=true)
     public static  User_functional_role_junction__c[] searchEmployees(String searchTerm) {
-        // Return all bears when no search term
+        // Return all employee when no search term
         searchTerm = searchTerm.trim();
         if (searchTerm == '') {
             return getEmployeesList();
