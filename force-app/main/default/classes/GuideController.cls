@@ -2,11 +2,36 @@ public with sharing class GuideController {
     @AuraEnabled(Cacheable=true)
     public static User[] getGuideList() {
         return[
-            SELECT Id, Name, Profile.Name 
+            SELECT Id, Name, Profile.Name, FullPhotoUrl 
             FROM User 
             WHERE Profile.Name = 'Mentor'
+            WITH SECURITY_ENFORCED
         ];
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<User> findGuides(String searchKey) {
+        String key = '%' + searchKey + '%';
+        return [
+            SELECT Id, Name, Profile.Name, FullPhotoUrl 
+            FROM User 
+            WHERE Profile.Name = 'Mentor' AND Name LIKE :key
+            WITH SECURITY_ENFORCED
+        ];
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static User getSingleGuide() {
+        return [
+            SELECT Id, Name, Profile.Name, FullPhotoUrl 
+            FROM User
+            WHERE Profile.Name = 'Mentor'
+            WITH SECURITY_ENFORCED
+            LIMIT 1
+        ];
+    }
+
+
 
     @AuraEnabled(Cacheable=true)
     public static User[] searchGuides(String searchTerm) {

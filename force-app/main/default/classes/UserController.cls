@@ -1,10 +1,16 @@
 public with sharing class UserController {
     @AuraEnabled(Cacheable=true)
-    public static User_functional_role_junction__c[] getEmployeesList() {
-        return [
-            SELECT Employee_Name__r.Name, Role__r.Name 
-            FROM User_functional_role_junction__c
-            ORDER BY Employee_Name__r.Name
+    public static User[] getEmployeesList() {
+        // return [
+        //     SELECT Employee_Name__r.Name, Role__r.Name 
+        //     FROM User_functional_role_junction__c
+        //     ORDER BY Employee_Name__r.Name
+        // ];
+        return[
+            SELECT Id, Name, Profile.Name, FullPhotoUrl 
+            FROM User 
+            WHERE Profile.Name = 'Employee Customer Community'
+            WITH SECURITY_ENFORCED
         ];
     }
 

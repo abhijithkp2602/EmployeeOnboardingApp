@@ -1,8 +1,39 @@
 <template>
+    <lightning-card
+        title="Guides"
+        icon-name="custom:custom103"
+    >
+        <div class="slds-m-around_medium" oncontactselect={handleGuideSelect}>
+            <template if:true={guides.data}>
+                <template for:each={guides.data} for:item="guide">
+                    <c-guide-list-employee-item
+                        key={guide.Id}
+                        guide={guide}
+                    ></c-guide-list-employee-item>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <template>
 	<template if:false={employeeList}>
 		<lightning-card title="Guide List" icon-name="">
 			<div class="slds-card__body_inner">
-				<!-- Start Guide list -->
+
+				Start Guide list 
+
 				<template if:true={guides.data}>
 					<lightning-input type="search"
 						onchange={handleSearchTermChange}
@@ -19,15 +50,19 @@
 							</lightning-layout-item>
 						</template>
 					</lightning-layout>
-					<!-- No guide found -->
+
+					No guide found
+
 					<template if:false={hasResults}>
 						<div class="slds-align_absolute-center slds-var-m-vertical_small">
 							we did not find results...
 						</div>
 					</template>
 				</template>
-				<!-- End guide list -->
-				<!-- Data failed to load        -->
+
+				End guide list -->
+				<!-- Data failed to load  
+
 				<template if:true={guides.error}>
 					<div class="slds-text-color_error">
 						An error occurred while loading the Guide list
@@ -37,21 +72,20 @@
 		</lightning-card>
 	</template>
 	<template if:true={employeeList}>
-		
 		<lightning-card title="Employees" icon-name="custom:custom103" class="slds-m-top_medium slds-m-bottom_x-large">
 		<div class="slds-m-around_medium">
 		<lightning-layout multiple-rows="true" pull-to-boundary="small">
 			<template for:each={employeeList} for:item="emp">
 				<lightning-layout-item key={emp.Id} flexibility="auto" padding="around-small" class="slds-var-p-around_x-small">
 					{emp.Employee_Name__r.Name}
-					<!-- <lightning-button label="View Task" variant="brand" onclick={handleClick} class="slds-m-left_x-small"></lightning-button> -->
 				</lightning-layout-item>
-				
-				<!-- <lightning-button label="View Employee" variant="brand" data-guideid={guide.Id} onclick={handleClick} class="slds-m-left_x-small"></lightning-button>	 -->
+
+				<lightning-button label="View Task" variant="brand" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+				<lightning-button label="View Employee" variant="brand" data-guideid={guide.Id} onclick={handleClick} class="slds-m-left_x-small"></lightning-button>	
+			
 			</template>
 		</lightning-layout>
 		</div>
-		</lightning-card>
-	
+		</lightning-card>	
 	</template>
-</template>
+</template> -->
