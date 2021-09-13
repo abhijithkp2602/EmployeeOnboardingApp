@@ -1,0 +1,20 @@
+<template>
+    <c-guide-tile onselected={contactSelected}></c-guide-tile>
+    <lightning-card title="EventWithData" icon-name="custom:custom9">
+
+        <lightning-layout class="slds-m-around_medium">
+            <!-- <lightning-layout-item> -->
+                <!-- <template if:true={listIsNotEmpty}>   key={guide.Id} guide={guide} -->
+                    <!-- <template for:each={guides.data} for:item="guide"> -->
+                        <!-- <c-guide-tile onselected={contactSelected}></c-guide-tile> -->
+                    <!-- </template> -->
+                <!-- </template> -->
+            <!-- </lightning-layout-item> -->
+            <lightning-layout-item class="slds-m-left_medium">
+                <template if:true={records}>
+                    <p>{records.Name}</p>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

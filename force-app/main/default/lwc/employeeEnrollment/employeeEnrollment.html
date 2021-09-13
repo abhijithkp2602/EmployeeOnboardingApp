@@ -1,7 +1,49 @@
 <template>
     <lightning-card>
         <lightning-tabset active-tab-value="one">
-            <lightning-tab label = "User Enrollment" value="one">
+            <lightning-tab label = "Guides and Employees" value="one">
+                <template if:false={employees}>
+                <lightning-card>
+                    <div class="slds-m-around_medium">
+                        <template if:true={guides.data}>
+                            <lightning-layout horizontal-align="space">
+                                <template for:each={guides.data} for:item="guide">
+                                    <a href="#" key={guide.Id} onguideview={handleGuideView} guide={guide} data-guideid={guide.Id} onclick={handleSelect}>
+                                        <lightning-layout-item padding="around-small" alignment-bump="center">
+                                            <img src={guide.FullPhotoUrl} alt="Profile photo" />
+                                            <br>
+                                            <p>{guide.Name}</p>
+                                            <p>{guide.Id}</p>
+                                        </lightning-layout-item>
+                                    </a>
+                                </template>
+                            </lightning-layout>
+                        </template>
+                    </div>
+                </lightning-card>
+                </template>
+                <template if:true={employees}> 
+                    true               
+                <!-- <lightning-datatable
+                    key-field="Id"
+                    data={data}
+                    >
+                </lightning-datatable> -->
+                    <lightning-card>
+
+                        <div class="slds-m-around_medium">
+                            <lightning-layout multiple-rows="true" pull-to-boundary="small" horizontal-align="space">
+                                <template for:each={employees} for:item="employee">
+                                    <lightning-layout-item key={employee.Id} employee={employee} flexibility="auto" padding="around-small" class="slds-var-p-around_x-small">
+                                        <p>{employee.Name}</p>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </div>
+                    </lightning-card>
+                </template>
+            </lightning-tab>
+            <lightning-tab label = "User Enrollment" value="two">
                 <lightning-record-form
                     object-api-name={objectApiName}
                     fields={fields}
@@ -10,14 +52,13 @@
                 >
                 </lightning-record-form>
             </lightning-tab>
-            <lightning-tab label = "Create Onboarding Step" value="two">
+            <lightning-tab label = "Create Onboarding Step" value="three">
                 <lightning-record-form
                     object-api-name={objectApiName1}
                     fields={fields1}
-                    record-type-id={RecordTypeId}
                     onsuccess={handleSuccess}
                     columns="2"
-                >
+                > 
                 </lightning-record-form>
             </lightning-tab>
         </lightning-tabset>

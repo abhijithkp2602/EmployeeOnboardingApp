@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <lightning-card
         title="Guides"
         icon-name="custom:custom103"
@@ -14,35 +14,15 @@
             </template>
         </div>
     </lightning-card>
-</template>
+</template> -->
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- <template>
+<template>
 	<template if:false={employeeList}>
 		<lightning-card title="Guide List" icon-name="">
 			<div class="slds-card__body_inner">
-
-				Start Guide list 
-
+				<!-- Start Guide list  -->
 				<template if:true={guides.data}>
-					<lightning-input type="search"
-						onchange={handleSearchTermChange}
-						variant="label-hidden"
-						class="slds-var-m-bottom_small"
-						label="Search"
-						placeholder="Search for Guides"
-						value={searchTerm}>
-					</lightning-input>
 					<lightning-layout multiple-rows="true" pull-to-boundary="small">
 						<template for:each={guides.data} for:item="guide">
 							<lightning-layout-item key={guides.Id} flexibility="auto" padding="around-small" size="3" class="slds-var-p-around_x-small">
@@ -51,29 +31,38 @@
 						</template>
 					</lightning-layout>
 
-					No guide found
-
+					<!-- No guide found -->
+<!-- 
 					<template if:false={hasResults}>
 						<div class="slds-align_absolute-center slds-var-m-vertical_small">
 							we did not find results...
 						</div>
 					</template>
-				</template>
+				</template> -->
 
-				End guide list -->
-				<!-- Data failed to load  
+				<!-- End guide list 
+				Data failed to load   -->
 
-				<template if:true={guides.error}>
+				<!-- <template if:true={guides.error}>
 					<div class="slds-text-color_error">
 						An error occurred while loading the Guide list
-					</div>
+					</div> -->
 				</template>
 			</div>
 		</lightning-card>
 	</template>
 	<template if:true={employeeList}>
 		<lightning-card title="Employees" icon-name="custom:custom103" class="slds-m-top_medium slds-m-bottom_x-large">
-		<div class="slds-m-around_medium">
+			<div class="slds-m-around_medium">
+				<lightning-layout multiple-rows="true" pull-to-boundary="small" horizontal-align="space">
+					<template for:each={employeeList} for:item="emp">
+						<lightning-layout-item key={emp.Id} emp={employeeList} flexibility="auto" padding="around-small" class="slds-var-p-around_x-small">
+							<p>{emp.Name}</p>
+						</lightning-layout-item>                                
+					</template>
+				</lightning-layout>
+			</div>
+		<!-- <div class="slds-m-around_medium">
 		<lightning-layout multiple-rows="true" pull-to-boundary="small">
 			<template for:each={employeeList} for:item="emp">
 				<lightning-layout-item key={emp.Id} flexibility="auto" padding="around-small" class="slds-var-p-around_x-small">
@@ -85,7 +74,7 @@
 			
 			</template>
 		</lightning-layout>
-		</div>
+		</div> -->
 		</lightning-card>	
 	</template>
-</template> -->
+</template>
