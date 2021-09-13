@@ -2,13 +2,14 @@
     <lightning-card>
         <lightning-tabset active-tab-value="one">
             <lightning-tab label = "Guides and Employees" value="one">
+                Employees: {employees}
                 <template if:false={employees}>
                 <lightning-card>
                     <div class="slds-m-around_medium">
                         <template if:true={guides.data}>
                             <lightning-layout horizontal-align="space">
                                 <template for:each={guides.data} for:item="guide">
-                                    <a href="#" key={guide.Id} onguideview={handleGuideView} guide={guide} data-guideid={guide.Id} onclick={handleSelect}>
+                                    <a href="#" key={guide.Id} guide={guide} data-guideid={guide.Id} onclick={handleSelect}>
                                         <lightning-layout-item padding="around-small" alignment-bump="center">
                                             <img src={guide.FullPhotoUrl} alt="Profile photo" />
                                             <br>
@@ -22,15 +23,14 @@
                     </div>
                 </lightning-card>
                 </template>
-                <template if:true={employees}> 
-                    true               
+                <template if:true={employees}>
+                    true          
                 <!-- <lightning-datatable
                     key-field="Id"
                     data={data}
                     >
                 </lightning-datatable> -->
                     <lightning-card>
-
                         <div class="slds-m-around_medium">
                             <lightning-layout multiple-rows="true" pull-to-boundary="small" horizontal-align="space">
                                 <template for:each={employees} for:item="employee">

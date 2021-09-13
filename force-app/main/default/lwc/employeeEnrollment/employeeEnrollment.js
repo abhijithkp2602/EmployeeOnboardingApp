@@ -19,9 +19,9 @@ import DISCRIPTION_FIELD from "@salesforce/schema/Onboarding_Step__c.Description
 
 
 export default class EmployeeEnrollment extends LightningElement {
-    @wire(getGuideList) 
-    guides;
-    employees;
+    @wire(getGuideList) guides;
+
+    @track employees;
 
     // @track guideidKey = '';
     // sampledata = '';
@@ -39,7 +39,7 @@ export default class EmployeeEnrollment extends LightningElement {
     
     
     // @track sample = [];
-    // @api employee;
+    // @api employees;
     @api guide;
 
     objectApiName = USERENROLLMENT_OBJECT;
@@ -55,10 +55,10 @@ export default class EmployeeEnrollment extends LightningElement {
         this.dispatchEvent(toastEvent);
     }
 
-    handleGuideView(event) {
-    	console.log(event);
-    	this.employees = event.detail;
-	}
+    // handleGuideView(event) {
+    // 	console.log(event);    onguideview={handleGuideView}
+    // 	this.employees = event.detail;
+	// }
 
     handleSelect(event) {
         // this.employees= true;
@@ -66,15 +66,18 @@ export default class EmployeeEnrollment extends LightningElement {
         console.log(this.guideidKey);
         getEmployee({
             GuideId : this.guideidKey
-        }).then(employees => {
-            const selectedEvent = new CustomEvent('guideview',{
-                detail : employees
-                // console.log('employees' + employees);
-            });
-        // Dispatches the event.
-            console.log(employees);
-            console.log(selectedEvent);
-            this.dispatchEvent(selectedEvent);
+        }).then(result => {
+            console.log('Got employees' + JSON.stringify(result));
+            this.employees = result;
+            console.log('this.employees' + JSON.stringify(this.employees));
+        //     const selectedEvent = new CustomEvent('guideview',{
+        //         detail : employees
+        //         // console.log('employees' + employees);
+        //     });
+        // // Dispatches the event.
+        //     console.log(employees);
+        //     console.log(selectedEvent);
+        //     this.dispatchEvent(selectedEvent);
             
             // if(employees.size>0){
             //     this.data = employees;
