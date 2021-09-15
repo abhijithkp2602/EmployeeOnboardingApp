@@ -2,22 +2,24 @@
     
 <lightning-card title="Close or Extend Onboarding" icon-name="custom:custom88">
 <div class="slds-box">
-
-    
     <!-- Start Guide list -->
     <template if:true={employees.data}>
-        <lightning-layout multiple-rows="true" pull-to-boundary="small">
+        <lightning-layout vertical-align="center" multiple-rows="true" pull-to-boundary="small">
+            <div class="slds-scrollable_y" style="height:24rem;width:30rem">
             <template for:each={employees.data} for:item="employee">
+             
                 <lightning-layout-item 
-                key={employee.Id} size="6" class="slds-var-p-around_xxx-small">
+                key={employee.Id} size="4" >
                     <c-list-tile employee={employee} 
                               onemployeeview={handleEmployeeView}></c-list-tile>
-                <lightning-button label="Extend" value={employee.Id} onclick={handleClick}></lightning-button>
-                <lightning-button label="Close" value={employee.Id} onclick={updateRecord} onsuccess={handleSuccess1}></lightning-button>  
-                </lightning-layout-item>
+                              <lightning-button style="margin:5px;" label="Extend" value={employee.Id} onclick={handleClick}></lightning-button>
+                              &nbsp;&nbsp;
+                <lightning-button label="Completed" value={employee.Id} onclick={updateRecord} onsuccess={handleSuccess1}></lightning-button>  
+               </lightning-layout-item>
             </template>
+        </div>
         </lightning-layout>
-        <!-- No bears found -->
+       <!-- No bears found -->
     </template>
    
     <!-- End bear list -->
@@ -34,12 +36,12 @@
                 </header>
                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                     <lightning-record-edit-form record-id={employeeId}
-                                object-api-name="User_functional_role_junction__c" onsuccess={handleSuccess}>
+                                object-api-name="User" onsuccess={handleSuccess}>
         <lightning-messages>
         </lightning-messages>
         <lightning-input-field field-name="Onboarding_End_Date__c">
         </lightning-input-field>
-        <lightning-input-field field-name="Reason_for_extending__c">
+        <lightning-input-field field-name="Reason_for_extend__c">
         </lightning-input-field>
         </lightning-record-edit-form>
                 </div>

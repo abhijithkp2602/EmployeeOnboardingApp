@@ -1,0 +1,105 @@
+<template>
+    <lightning-card>
+    <lightning-tabset active-tab-value="one">
+        <lightning-tab label = "Guides and Employees" value="one">
+            <template if:false={tasks}>
+                <h3>Employees: </h3>
+            <lightning-card>
+                <div class="slds-m-around_medium">
+                    <template if:true={employees.data}>
+                        <lightning-layout horizontal-align="space">
+                            <template for:each={employees.data} for:item="employee">
+                                <lightning-layout-item key={employee.Id} employee={employee} flexibility="auto" padding="around-small" class="slds-var-p-around_x-small">
+                                    <img src={employee.FullPhotoUrl} alt="Profile photo" />
+                                    <p>{employee.Name}</p>
+                                    <p>
+                                    <lightning-button label="View Progress" data-employeeid={employee.Id} title="Non-primary action" onclick={taskProgress} class="slds-m-left_x-small"></lightning-button>
+                                </p>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </template>
+                </div>
+            </lightning-card>
+            </template>
+            
+            <template if:true={tasks}>
+                <h3>Tasks:</h3>
+                <lightning-card>
+                    <div class="slds-m-around_medium">
+                        <!-- <lightning-layout multiple-rows="true" pull-to-boundary="small" horizontal-align="space">
+                            <template for:each={tasks} for:item="task">
+                                <lightning-layout-item key={task.Id} task={task} flexibility="auto" padding="around-small" class="slds-var-p-around_x-small"> -->
+                                    <table>
+                                        <tr>
+                                          <th>Task</th>
+                                          <th>Assigned Date</th>
+                                          <th>Due Date</th>
+                                          <th>Submission</th>
+                                          <th>Status</th>
+                                          <!-- <th>Action</th> -->
+                                        </tr>
+                                        <template for:each={tasks} for:item="task">
+                                        <!-- <template for:each={assignedTask} for:item="task"> -->
+                                            <tr key={task.Id}>                            
+                                            <td>{task.Step_name__c}</td>
+                                            <td>{task.Assigning_Date__c}</td>
+                                            <td>{task.Target_Date__c}</td>
+                                            <td>{task.Submission_date__c}</td>
+                                            <td>{task.Status__c}</td>
+                                            <!-- <td><lightning-button variant="Base" label="View" onclick={showTaskDetail} value={task.Id}></lightning-button></td> -->
+                                            </tr>
+                                        </template>
+                                    </table>
+                                <!-- </lightning-layout-item>
+                        </lightning-layout> -->
+                    </div>
+                </lightning-card>
+                <div>
+                    <lightning-button label="Back" title="Non-primary action" onclick={showEmployee} class="slds-m-left_x-small"></lightning-button>
+                    &nbsp;
+                    <lightning-button label="Assign Task" title="Non-primary action" onclick={openModal} class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </template>
+            <template if:true={isModalOpen}>
+               
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close"
+                                    alternative-text="close"
+                                    variant="inverse"
+                                    size="small" ></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Task</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                          <div class="slds-m-around_medium">
+                            <lightning-record-edit-form object-api-name="User_Assigned_Task__c" onsuccess={handleSuccess}>
+                                <lightning-input-field field-name="Name"></lightning-input-field>
+                                <lightning-input-field field-name="Assigned_To__c" value={userid} disabled></lightning-input-field>
+                                <lightning-input-field field-name="Mentor_Name__c" value={mentorId} disabled></lightning-input-field>
+                                <!-- <lightning-input-field field-name="Manager_Name__c" value={managerId} disabled></lightning-input-field> -->
+                                <lightning-input-field field-name="Assigning_Date__c"></lightning-input-field>
+                                <lightning-input-field field-name="Target_Date__c"></lightning-input-field>
+                                <lightning-input-field field-name="Status__c"></lightning-input-field>
+                                <lightning-input-field field-name="Step_name__c"></lightning-input-field>
+                                    <lightning-button
+                                        class="slds-m-top_small"
+                                        type="submit"
+                                        variant="brand"
+                                        label="Save">
+                                    </lightning-button>
+                            </lightning-record-edit-form>
+                        </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template> 
+        </lightning-tab>
+</lightning-tabset>
+</lightning-card>
+</template>

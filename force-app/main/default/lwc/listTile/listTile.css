@@ -1,0 +1,16 @@
+.lgc-bg {
+    background-color: rgb(255, 255, 255);
+}
+
+.lgc-bg-inverse {
+    background-color: rgb(22, 52, 95);
+}
+img{
+    border-radius: 35px;
+    width: 70px;
+    height: 70px;
+}
+.Style{
+    margin:5px;
+    padding:5px;
+}

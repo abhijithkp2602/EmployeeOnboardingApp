@@ -1,18 +1,20 @@
 public class GuideEmployeeController {
-    @AuraEnabled
+    @AuraEnabled(Cacheable=true)
     public static User[] getEmployee(Id GuideId) {
         system.debug('Welcome to apex');
         return [
-            SELECT Id, Name FROM User WHERE Id IN 
-            (SELECT Employee_Name__c FROM User_functional_role_junction__c 
-            WHERE Mentor_Name__c =: GuideId AND Onboarding_completed__c =false)
+            SELECT Id, Name, Functional_Role__c, FullPhotoUrl FROM User
+            WHERE Mentor__c =: GuideId AND Completed_Onboarding__c =false
             AND Profile.Name = 'Employee Customer Community'
-            // SELECT Employee_Name__r.Name, 
-            // (SELECT Id, Name, Profile.Name, FullPhotoUrl
-            // FROM User 
-            // WHERE Profile.Name = 'Employee Customer Community')
-            // FROM User_functional_role_junction__c
-            // WHERE Mentor_Name__c =: Guideid
         ];
     }
+    // @AuraEnabled(cacheable=true)
+    // public static User getSingleUser() {
+    //     return [
+    //         SELECT Id, FirstName, LastName, Mentor__c
+    //         FROM User
+    //         WITH SECURITY_ENFORCED
+    //         LIMIT 1
+    //     ];
+    // }
 }

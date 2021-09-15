@@ -86,7 +86,7 @@ export default class oBExtending extends NavigationMixin(LightningElement) {
 			type: 'standard__recordPage',
 			attributes: {
 				recordId: employeeId,
-				objectApiName: 'User_functional_role_junction__c',
+				objectApiName: 'User',
 				actionName: 'edit',
 			},
 		});
@@ -97,7 +97,7 @@ export default class oBExtending extends NavigationMixin(LightningElement) {
             type: 'standard__recordPage',
             attributes: {
                 recordId: this.employees.Id,
-                objectApiName: 'User_functional_role_junction__c',
+                objectApiName: 'User',
                 actionName: 'view'
             }
         });
@@ -110,7 +110,7 @@ export default class oBExtending extends NavigationMixin(LightningElement) {
             type: 'standard__recordPage',
             attributes: {
                 recordId: employeeId,
-                objectApiName: 'User_functional_role_junction__c',
+                objectApiName: 'User',
                 actionName: 'edit'
             }
         });

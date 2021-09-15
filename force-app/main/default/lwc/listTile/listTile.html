@@ -1,0 +1,18 @@
+<template>
+<div class="slds-m-top_medium slds-m-bottom_x-large">
+<div class="slds-p-around_medium lgc-bg">
+    <!-- <div class="slds-scrollable_y" style="height:3rem;width:24rem"> -->
+            <lightning-tile class="employee-tile" icon-name="standard:user">
+                <!-- <div class="slds-var-p-horizontal_small bear-tile-body"> -->
+                    <div class="slds-media">
+                            <img src={employee.FullPhotoUrl} alt="Profile photo" />
+                            <div class="Style"> 
+                            <span>Name: </span> <span>{employee.Name}</span>
+                            </br><span>Role: </span> <span>{employee.Functional_Role__c}</span>
+                        </br><span>End Date: </span> <span>{employee.Onboarding_End_Date__c}</span>
+                    </div>
+                </div>
+            </lightning-tile>
+        </div>
+        </div>
+    </template>
