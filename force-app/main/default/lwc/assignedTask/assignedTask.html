@@ -8,18 +8,20 @@ using this for Employee Flow
         <table>
         <tr>
             <th>Task</th>
-            <th>Type</th>
+            <th>Name</th>
             <th>Start Date</th>                          
-            <th>Due Date</th>
+            <th>Submission Date</th>
             <th>Status</th>
+            
             <th>Action</th>
         </tr>
         <template for:each={assignedTask} for:item="task">
             <tr key={task.Id}>
             <td>{task.Name}</td>
-            <td>{task.Step_name__c}</td>
+            <td>{task.Step_name__r.Name}</td>
             <td>{task.Assigning_Date__c}</td>
             <td>{task.Submission_date__c}</td>
+            
             <td>{task.Status__c}</td>
             <td><lightning-button variant="Base" label="Edit" onclick={showTaskDetail} value={task.Id}></lightning-button></td>
             </tr>

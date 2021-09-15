@@ -53,62 +53,53 @@
                 <template if:true={tasks}>
                     <h3>Your Tasks</h3>
                     <lightning-card>
-                        
-                        <lightning-record-view-form 
-                            object-api-name="User_Assigned_Task__c"
-                            record-id={taskid}>
-                            <template for:each={tasks} for:item="task">
-                                <div key={task.Id}>
-                                    <lightning-output-field field-name="Step_name__c">
-                                    </lightning-output-field>
-                                    <lightning-output-field field-name="Assigning_Date__c">
-                                    </lightning-output-field>
-                                    <lightning-output-field field-name="Target_Date__c">
-                                    </lightning-output-field>
-                                    <lightning-output-field field-name="Submission_date__c">
-                                    </lightning-output-field>
-                                    <lightning-output-field field-name="Status__c">
-                                    </lightning-output-field>
-                                </div>
-                            </template>
-                        </lightning-record-view-form>
-                    
-
-                        <!-- <div class="slds-m-around_medium">
-
+                        <!-- <template for:each={tasks} for:item="task" data-taskid={task.Id}>
+                            <div key={task.Id} >
+                                <lightning-record-view-form 
+                                    object-api-name="User_Assigned_Task__c"
+                                    record-id={taskid}>
+                                        <lightning-output-field field-name="Step_name__c">
+                                        </lightning-output-field>
+                                        <lightning-output-field field-name="Assigning_Date__c">
+                                        </lightning-output-field>
+                                        <lightning-output-field field-name="Target_Date__c">
+                                        </lightning-output-field>
+                                        <lightning-output-field field-name="Submission_date__c">
+                                        </lightning-output-field>
+                                        <lightning-output-field field-name="Status__c">
+                                        </lightning-output-field>    
+                                </lightning-record-view-form>
+                            </div>
+                        </template> -->
+                        <div class="slds-m-around_medium">
                             <lightning-layout multiple-rows="true" pull-to-boundary="small" horizontal-align="space">
-                                <template for:each={tasks} for:item="task">
-                                    <lightning-layout-item key={task.Id} task={task} flexibility="auto" padding="around-small" class="slds-var-p-around_x-small">
-                                        
+                                <!-- <template for:each={tasks} for:item="task"> -->
+                                    <!-- <lightning-layout-item key={task.Id} task={task} flexibility="auto" padding="around-small" class="slds-var-p-around_x-small">      -->
                                         <table>
                                             <tr>
                                               <th>Task</th>
                                               <th>Assigned Date</th>
-                                              <th>Due Date</th>
-                                              <th>Submission</th>
+                                              <th>Target Date</th>
+                                              <th>Submission Date</th>
+                                              
                                               <th>Status</th>
-
-                                              <th>Action</th>
-
+                                              <!-- <th>Action</th> -->
                                             </tr>
                                             <template for:each={tasks} for:item="task">
-                                                <tr key={task.Id}>                            
-                                                <td>{task.Step_name__c}</td>
+                                                <tr key={task.Id}>
+                                                <td>{task.Step_name__r.Name}</td>
                                                 <td>{task.Assigning_Date__c}</td>
                                                 <td>{task.Target_Date__c}</td>
                                                 <td>{task.Submission_date__c}</td>
-                                                <td>{task.Status__c}</td>
-
-                                                <td><lightning-button variant="Base" label="View" onclick={showTaskDetail} value={task.Id}></lightning-button></td>
                                                 
-                                            </tr>
+                                                <td>{task.Status__c}</td>
+                                                <!-- <td><lightning-button variant="Base" label="View" onclick={showTaskDetail} value={task.Id}></lightning-button></td> -->
+                                                </tr>
                                             </template>
                                         </table>
-
-                                    </lightning-layout-item>
+                                    <!-- </lightning-layout-item> -->
                             </lightning-layout>
-
-                        </div> -->
+                        </div>
                     </lightning-card>
                     <div>
                         <lightning-button label="Back" title="Non-primary action" onclick={showEmployee} class="slds-m-left_x-small"></lightning-button>

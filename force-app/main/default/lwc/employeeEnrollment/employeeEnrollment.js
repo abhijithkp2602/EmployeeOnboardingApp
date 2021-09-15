@@ -4,7 +4,6 @@ import strUserId from '@salesforce/user/Id';
 import getGuideList from '@salesforce/apex/GuideController.getGuideList';
 import getEmployee from '@salesforce/apex/GuideEmployeeController.getEmployee';
 import getTask from '@salesforce/apex/EmployeeTaskController.getTask';
-
 import enrollUser from '@salesforce/apex/AssignedTaskProvider.enrollUser';
 
 // import USERASSIGNEDTASK_OBJECT from "@salesforce/schema/User_Assigned_Task__c";
@@ -20,10 +19,7 @@ import DURATIONTYPE_FIELD from "@salesforce/schema/Onboarding_Step__c.Duration_T
 import DURATION_FIELD from "@salesforce/schema/Onboarding_Step__c.Duration__c";
 import DISCRIPTION_FIELD from "@salesforce/schema/Onboarding_Step__c.Description__c";
 
-
 export default class EmployeeEnrollment extends LightningElement {
-
-    @api recordId;
 
     managerId = strUserId;
 
@@ -42,6 +38,7 @@ export default class EmployeeEnrollment extends LightningElement {
     @track explorerid;
     @track mentorid;
     @track roleid;
+    // @track taskrecid;
 
     handleExplorerSelection(event){
         console.log("the selected explorer id is"+event.detail);
@@ -71,7 +68,6 @@ export default class EmployeeEnrollment extends LightningElement {
                 'title' : 'Updated',
                 "message" : 'Record Updated Successfully',
                 "variant" : "success",
-                
             });
             this.dispatchEvent(toast); 
             window.location.reload();
@@ -81,8 +77,6 @@ export default class EmployeeEnrollment extends LightningElement {
         })
         }
     }
-
-
     // objectApiName = USERASSIGNEDTASK_OBJECT;
     // fields = [STEPNAME_FIELD, ASSIGNEDDATE_FIELD, TARGETDATE_FIELD, SUBMISSIONDATE_FIELD, STATUS_FIELD];
 
@@ -96,6 +90,7 @@ export default class EmployeeEnrollment extends LightningElement {
             variant: "success"
         });
         this.dispatchEvent(toastEvent);
+        window.location.reload();
     }
 
     handleSelect(event) {
@@ -130,6 +125,11 @@ export default class EmployeeEnrollment extends LightningElement {
         this.userid = this.employeeidKey;
         console.log('userid' + JSON.stringify(this.userid));
     }
+
+    // showTaskDetail(event){
+    //     this.taskrecid = event.target.value;
+    //     this.isModalOpen = true;
+    // }
 
     showEmployee(event){
         event.preventDefault();

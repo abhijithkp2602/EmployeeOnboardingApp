@@ -7,7 +7,7 @@ public without sharing class AssignedTaskProvider {
     @AuraEnabled
     public static List<User_Assigned_Task__c> getMyTaskList(){
         String loggedinuser = UserInfo.getUserId();
-        return [SELECT Assigned_To__c,Assigning_Date__c,Id,Mentor_Name__c,Name,Overdue__c,Status__c,Step_name__c,Submission_date__c 
+        return [SELECT Assigned_To__c,Assigning_Date__c,Id,Mentor_Name__c,Name,Overdue__c,Status__c,Step_name__r.Name,Submission_date__c 
         FROM User_Assigned_Task__c Where Assigned_To__c=:loggedinuser];
     }
     

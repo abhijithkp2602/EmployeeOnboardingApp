@@ -34,18 +34,20 @@
                                         <tr>
                                           <th>Task</th>
                                           <th>Assigned Date</th>
-                                          <th>Due Date</th>
-                                          <th>Submission</th>
+                                          <th>Target Date</th>
+                                          <th>Submission Date</th>
+                                          
                                           <th>Status</th>
                                           <!-- <th>Action</th> -->
                                         </tr>
                                         <template for:each={tasks} for:item="task">
                                         <!-- <template for:each={assignedTask} for:item="task"> -->
-                                            <tr key={task.Id}>                            
-                                            <td>{task.Step_name__c}</td>
+                                            <tr key={task.Id}>
+                                            <td>{task.Step_name__r.Name}</td>
                                             <td>{task.Assigning_Date__c}</td>
                                             <td>{task.Target_Date__c}</td>
                                             <td>{task.Submission_date__c}</td>
+                                            
                                             <td>{task.Status__c}</td>
                                             <!-- <td><lightning-button variant="Base" label="View" onclick={showTaskDetail} value={task.Id}></lightning-button></td> -->
                                             </tr>
@@ -99,6 +101,15 @@
                 </section>
                 <div class="slds-backdrop slds-backdrop_open"></div>
             </template> 
+        </lightning-tab>
+        <lightning-tab label = "Create Onboarding Step" value="two">
+            <lightning-record-form
+                object-api-name={objectApiName1}
+                fields={fields1}
+                columns="2"
+                onsuccess={handleSuccess}  
+            >
+            </lightning-record-form>
         </lightning-tab>
 </lightning-tabset>
 </lightning-card>

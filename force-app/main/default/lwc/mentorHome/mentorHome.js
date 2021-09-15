@@ -4,6 +4,11 @@ import Id from '@salesforce/user/Id';
 import getEmployee from '@salesforce/apex/GuideEmployeeController.getEmployee';
 import getTask from '@salesforce/apex/EmployeeTaskController.getTask';
 
+import ONBOARDINGSTEP_OBJECT from "@salesforce/schema/Onboarding_Step__c";
+import ONBOARDINGSTEPNAME_FIELD from "@salesforce/schema/Onboarding_Step__c.Name";
+import DURATIONTYPE_FIELD from "@salesforce/schema/Onboarding_Step__c.Duration_Type__c";
+import DURATION_FIELD from "@salesforce/schema/Onboarding_Step__c.Duration__c";
+import DISCRIPTION_FIELD from "@salesforce/schema/Onboarding_Step__c.Description__c";
 
 export default class MentorHome extends LightningElement {
 
@@ -11,7 +16,6 @@ export default class MentorHome extends LightningElement {
     employees;
 
     mentorId = Id;
-    
 
     @track tasks;
     @api guide;
@@ -24,24 +28,8 @@ export default class MentorHome extends LightningElement {
     @track closeModalOpen = false;
 
 
-    // handleSelect(event) {
-    //     event.preventDefault();
-    //     this.guideidKey = event.currentTarget.dataset.guideid;
-    //     console.log(this.guideidKey);
-    //     getEmployee({
-    //         GuideId : this.guideidKey
-    //     }).then(result => {
-    //         this.employees = result;
-    //         console.log('this.employees' + JSON.stringify(this.employees));
-    //     });
-    //     this.mentorid = this.guideidKey;
-    //     console.log('mentorid >>>' + JSON.stringify(this.mentorid));
-    // }
-
-    // showguide(event){
-    //     event.preventDefault();
-    //     this.employees = undefined;
-    // }
+    objectApiName1 = ONBOARDINGSTEP_OBJECT;
+    fields1 = [ONBOARDINGSTEPNAME_FIELD, DISCRIPTION_FIELD, DURATIONTYPE_FIELD, DURATION_FIELD];
 
     taskProgress(event){
         event.preventDefault();
